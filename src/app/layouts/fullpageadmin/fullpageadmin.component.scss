@@ -6,14 +6,26 @@
 
 .content {
     padding: 20px;
+    background: #f9f9f9;
 }
 
 header {
-    background: #ddd;
+    background: #292b31;
     padding: 20px;
+    color: #fff;
+    font-size: 24px;
 }
 
 .sidebar {
-    background: #bbb;
+    background: #292b31;
     padding: 20px;
+    a{
+        color: #fff;
+    }
+}
+
+.logoIcon {
+    font-size: 30px;
+    height: 30px;
+    width: 30px;
 }
