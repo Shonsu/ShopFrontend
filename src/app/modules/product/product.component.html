@@ -19,7 +19,8 @@
     </mat-card-actions>
 </mat-card>
 
-<mat-paginator *ngIf="page && page.totalElements > 0"  
+<mat-paginator *ngIf="page && page.totalElements > 0"
+    showFirstLastButtons  
     [length]="page.totalElements"
     [pageSize]="10"
     [pageSizeOptions]="[10, 25, 50, 100]"
