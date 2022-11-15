@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { Router } from '@angular/router';
 import { map, startWith, switchMap } from 'rxjs';
 import { AdminProductService } from './admin-product.service';
 import { AdminProduct } from './model/adminProduct';
@@ -16,7 +17,10 @@ export class AdminProductComponent implements AfterViewInit {
     data: AdminProduct[] = [];
     totalElements: number = 0;
 
-    constructor(private adminProductService: AdminProductService) { }
+    constructor(
+        private adminProductService: AdminProductService,
+        private router: Router
+        ) { }
 
     ngAfterViewInit(): void {
         this.paginator.page.pipe(
@@ -31,5 +35,9 @@ export class AdminProductComponent implements AfterViewInit {
         ).subscribe(data => (this.data = data));
     }
 
+    displayUpdateProduct(row: AdminProduct){
+        let route = '/admin/products/update/' + row.id;
+        this.router.navigate([route]);
+    }
 
 }

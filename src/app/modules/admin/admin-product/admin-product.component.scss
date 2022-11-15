@@ -1,9 +1,15 @@
-table{
+table {
     width: 100%;
 }
-.mat-column-id{
+
+.mat-column-id {
     width: 60px;
 }
-.mat-column-actions{
+
+.mat-column-actions {
     width: 140px;
+}
+
+tr.product-row:hover {
+    background: whitesmoke;
 }

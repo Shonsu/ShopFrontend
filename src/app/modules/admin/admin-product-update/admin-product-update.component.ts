@@ -14,7 +14,8 @@ export class AdminProductUpdateComponent implements OnInit {
 
     product!: AdminProductUpdate;
     productForm!: FormGroup;
-
+    buttonAvailableText = "Odblokuj";
+    buttonAvailable: boolean = true;
     constructor(
         private router: ActivatedRoute,
         private adminProductUpdateService: AdminProductUpdateService,
@@ -30,7 +31,8 @@ export class AdminProductUpdateComponent implements OnInit {
             category: [''],
             price: [''],
             currency: ['PLN']
-        })
+        });
+        this.productForm.disable();
     }
 
     getProduct() {
@@ -40,7 +42,6 @@ export class AdminProductUpdateComponent implements OnInit {
     }
 
     submit() {
-
         let id = Number(this.router.snapshot.params['id']);
 
         this.adminProductUpdateService.saveProduct(id, {        //   this.productForm.value
@@ -53,6 +54,19 @@ export class AdminProductUpdateComponent implements OnInit {
             this.mapFormValues(product);
             this.snackBar.open("Produkt został zapisany", '', { duration: 3000 });
         });
+    }
+
+    toggleUpdate() {
+        if (this.buttonAvailable) {
+            this.buttonAvailable = false;
+            this.productForm.enable();
+            this.buttonAvailableText = "Zablokuj";
+        } else {
+            this.buttonAvailable = true;
+            this.productForm.disable();
+            this.buttonAvailableText = "Odblokuj";
+        }
+
     }
 
     private mapFormValues(product: AdminProductUpdate): void {
