@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { AdminMessageComponent } from 'src/app/modules/admin/admin-message/admin-message.component';
 import { AdminProductAddComponent } from 'src/app/modules/admin/admin-product-add/admin-product-add.component';
 import { AdminProductFormComponent } from 'src/app/modules/admin/admin-product-form/admin-product-form.component';
 import { AdminProductUpdateComponent } from 'src/app/modules/admin/admin-product-update/admin-product-update.component';
@@ -18,7 +19,8 @@ import { FullpageadminComponent } from './fullpageadmin.component';
     AdminProductComponent,
     AdminProductUpdateComponent,
     AdminProductAddComponent,
-    AdminProductFormComponent
+    AdminProductFormComponent,
+    AdminMessageComponent
   ],
   imports: [
     CommonModule,
