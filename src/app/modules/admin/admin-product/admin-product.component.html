@@ -30,12 +30,14 @@
             <button mat-icon-button [routerLink]="['/admin/products/update', element.id]">
                 <mat-icon color="primary">edit</mat-icon>
             </button>
+            <button mat-icon-button (click)="confirmDelete(element)">
+                <mat-icon color="warn">delete</mat-icon>
+            </button>
         </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row class="product-row" *matRowDef="let row; columns: displayedColumns;"
-        (click)="displayUpdateProduct(row)"></tr>
+    <tr mat-row class="product-row" *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 <mat-paginator showFirstLastButtons [length]="totalElements" [pageSizeOptions]="[25, 10, 100]" [pageSize]="25">
 </mat-paginator>

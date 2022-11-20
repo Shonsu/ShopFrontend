@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { AdminConfirmDialogComponent } from 'src/app/modules/admin/admin-confirm-dialog/admin-confirm-dialog.component';
 import { AdminMessageComponent } from 'src/app/modules/admin/admin-message/admin-message.component';
 import { AdminProductAddComponent } from 'src/app/modules/admin/admin-product-add/admin-product-add.component';
 import { AdminProductFormComponent } from 'src/app/modules/admin/admin-product-form/admin-product-form.component';
@@ -20,7 +21,8 @@ import { FullpageadminComponent } from './fullpageadmin.component';
     AdminProductUpdateComponent,
     AdminProductAddComponent,
     AdminProductFormComponent,
-    AdminMessageComponent
+    AdminMessageComponent,
+    AdminConfirmDialogComponent
   ],
   imports: [
     CommonModule,
