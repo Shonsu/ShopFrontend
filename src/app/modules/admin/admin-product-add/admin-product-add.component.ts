@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AdminMessageService } from '../admin-message.service';
+import { AdminProductUpdate } from '../admin-product-update/model/adminProductUpdate';
 import { AdminProductAddService } from './admin-product-add.service';
 
 @Component({
@@ -13,6 +14,10 @@ import { AdminProductAddService } from './admin-product-add.service';
 export class AdminProductAddComponent implements OnInit {
 
     productForm!: FormGroup;
+    imageForm!: FormGroup;
+    image: string | null = null;
+
+    requiredFileTypes = "image/jpeg, image/jpg, image/png";
 
     constructor(
         private adminProductAddService: AdminProductAddService,
@@ -32,10 +37,22 @@ export class AdminProductAddComponent implements OnInit {
             currency: ['PLN', Validators.required],
             slug: ['', [Validators.required, Validators.minLength(4)]]
         });
+        this.imageForm = this.formBuilder.group({
+            file: ['']
+        })
     }
 
     submit() {
-        this.adminProductAddService.saveNewProduct(this.productForm.value)
+        this.adminProductAddService.saveNewProduct({
+            name: this.productForm.get('name')?.value,
+            description: this.productForm.get('description')?.value,
+            fullDescription: this.productForm.get('fullDescription')?.value,
+            category: this.productForm.get('category')?.value,
+            price: this.productForm.get('price')?.value,
+            currency: this.productForm.get('currency')?.value,
+            slug: this.productForm.get('slug')?.value,
+            image: this.image
+        }as AdminProductUpdate)
             .subscribe({
                 next: product => {
                 this.router.navigate(["/admin/products/update", product.id])
@@ -43,5 +60,20 @@ export class AdminProductAddComponent implements OnInit {
             },
             error: err => this.adminMessageService.addSpringErrors(err.error)
         });
+    }
+
+    uploadFile() {
+        let formData = new FormData();
+        formData.append('file', this.imageForm.get('file')?.value);
+        this.adminProductAddService.uploadImage(formData)
+            .subscribe(result => this.image = result.filename);
+    }
+
+    onFileChange(event: any) {
+        if (event.target.files.length > 0) {
+            this.imageForm.patchValue({
+                file: event.target.files[0]
+            })
+        }
     }
 }

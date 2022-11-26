@@ -13,7 +13,7 @@ import { AdminProductUpdate } from './model/adminProductUpdate';
 })
 export class AdminProductUpdateComponent implements OnInit {
 
-    product!: AdminProductUpdate;
+    //product!: AdminProductUpdate;
     productForm!: FormGroup;
     imageForm!: FormGroup;
     image: string | null = null;
