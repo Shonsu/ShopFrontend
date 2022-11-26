@@ -1,5 +1,8 @@
 table {
     width: 100%;
+    td{
+        padding-left: 20px;
+    }
 }
 
 .mat-column-id {
@@ -8,6 +11,12 @@ table {
 
 .mat-column-actions {
     width: 140px;
+}
+.mat-column-image {
+    width: 150px;
+    img{
+        width: 150px;
+    }
 }
 
 tr.product-row:hover {
