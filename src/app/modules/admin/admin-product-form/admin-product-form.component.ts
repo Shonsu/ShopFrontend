@@ -1,8 +1,7 @@
 
 import { Component, Input, OnInit } from "@angular/core";
-import { GridAreaStyleBuilder } from "@angular/flex-layout";
 import { FormGroup } from "@angular/forms";
-import { AdminCategoryNameDto } from "./adminCategoryNameDto";
+import { AdminCategoryNameDto } from "../common/dto/adminCategoryNameDto";
 import { FormCategoryService } from "./form-category.service";
 
 @Component({
