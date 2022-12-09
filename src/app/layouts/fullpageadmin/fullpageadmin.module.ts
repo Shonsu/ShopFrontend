@@ -7,11 +7,11 @@ import { AdminCategoryAddComponent } from 'src/app/modules/admin/admin-category/
 import { AdminCategoryFormComponent } from 'src/app/modules/admin/admin-category/admin-category-form/admin-category-form.component';
 import { AdminCategoryUpdateComponent } from 'src/app/modules/admin/admin-category/admin-category-update/admin-category-update.component';
 import { AdminCategoryComponent } from 'src/app/modules/admin/admin-category/admin-category.component';
-import { AdminConfirmDialogComponent } from 'src/app/modules/admin/admin-confirm-dialog/admin-confirm-dialog.component';
-import { AdminMessageComponent } from 'src/app/modules/admin/admin-message/admin-message.component';
-import { AdminProductAddComponent } from 'src/app/modules/admin/admin-product-add/admin-product-add.component';
-import { AdminProductFormComponent } from 'src/app/modules/admin/admin-product-form/admin-product-form.component';
-import { AdminProductUpdateComponent } from 'src/app/modules/admin/admin-product-update/admin-product-update.component';
+import { AdminConfirmDialogComponent } from 'src/app/modules/admin/common/component/admin-confirm-dialog/admin-confirm-dialog.component';
+import { AdminMessageComponent } from 'src/app/modules/admin/common/component/admin-message/admin-message.component';
+import { AdminProductAddComponent } from 'src/app/modules/admin/admin-product/admin-product-add/admin-product-add.component';
+import { AdminProductFormComponent } from 'src/app/modules/admin/admin-product/admin-product-form/admin-product-form.component';
+import { AdminProductUpdateComponent } from 'src/app/modules/admin/admin-product/admin-product-update/admin-product-update.component';
 import { AdminProductComponent } from 'src/app/modules/admin/admin-product/admin-product.component';
 import { AdminComponent } from 'src/app/modules/admin/admin.component';
 import { MaterialModule } from 'src/app/shared/material.module';

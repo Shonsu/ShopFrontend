@@ -1,5 +1,5 @@
-import { Page } from "src/app/shared/model/page";
-import { Product } from "../../product/model/Product";
+import { Page } from "src/app/modules/common/model/page";
+import { Product } from "../../common/model/Product";
 import { Category } from "./category";
 
 export interface CategoryProducts{

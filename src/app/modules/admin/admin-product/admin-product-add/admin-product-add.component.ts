@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
-import { AdminMessageService } from '../admin-message.service';
-import { AdminProductUpdateService } from './admin-product-update.service';
-import { AdminProductUpdate } from './model/adminProductUpdate';
+import { Router } from '@angular/router';
+import { AdminMessageService } from '../../common/service/admin-message.service';
+import { AdminProductImageService } from '../admin-product-image.service';
+import { AdminProductUpdate } from '../model/adminProductUpdate';
+import { AdminProductAddService } from './admin-product-add.service';
 
 @Component({
-    selector: 'app-admin-product-update',
-    templateUrl: './admin-product-update.component.html',
-    styleUrls: ['./admin-product-update.component.scss']
+    selector: 'app-admin-product-add',
+    templateUrl: './admin-product-add.component.html',
+    styleUrls: ['./admin-product-add.component.scss']
 })
-export class AdminProductUpdateComponent implements OnInit {
+export class AdminProductAddComponent implements OnInit {
 
-    //product!: AdminProductUpdate;
     productForm!: FormGroup;
     imageForm!: FormGroup;
     image: string | null = null;
@@ -21,15 +21,15 @@ export class AdminProductUpdateComponent implements OnInit {
     requiredFileTypes = "image/jpeg, image/jpg, image/png";
 
     constructor(
-        private router: ActivatedRoute,
-        private adminProductUpdateService: AdminProductUpdateService,
+        private adminProductAddService: AdminProductAddService,
         private formBuilder: FormBuilder,
         private snackBar: MatSnackBar,
-        private adminMessageService: AdminMessageService
+        private router: Router,
+        private adminMessageService: AdminMessageService,
+        private adminProductImageService: AdminProductImageService 
     ) { }
 
     ngOnInit(): void {
-        this.getProduct();
         this.productForm = this.formBuilder.group({
             name: ['', [Validators.required, Validators.minLength(4)]],
             description: ['', [Validators.required, Validators.minLength(4)]],
@@ -44,16 +44,8 @@ export class AdminProductUpdateComponent implements OnInit {
         })
     }
 
-    getProduct() {
-        let id = Number(this.router.snapshot.params['id']);
-        this.adminProductUpdateService.getProduct(id)
-            .subscribe(product => this.mapFormValues(product));
-    }
-
     submit() {
-        let id = Number(this.router.snapshot.params['id']);
-
-        this.adminProductUpdateService.saveProduct(id, {        //   this.productForm.value
+        this.adminProductAddService.saveNewProduct({
             name: this.productForm.get('name')?.value,
             description: this.productForm.get('description')?.value,
             fullDescription: this.productForm.get('fullDescription')?.value,
@@ -62,10 +54,11 @@ export class AdminProductUpdateComponent implements OnInit {
             currency: this.productForm.get('currency')?.value,
             slug: this.productForm.get('slug')?.value,
             image: this.image
-        } as AdminProductUpdate).subscribe({
-            next: product => {
-                this.mapFormValues(product);
-                this.snackBar.open("Produkt został zapisany", '', { duration: 3000 });
+        }as AdminProductUpdate)
+            .subscribe({
+                next: product => {
+                this.router.navigate(["/admin/products/update", product.id])
+                    .then(() => this.snackBar.open("Produkt został dodany", "", { duration: 3000 }))
             },
             error: err => this.adminMessageService.addSpringErrors(err.error)
         });
@@ -74,7 +67,7 @@ export class AdminProductUpdateComponent implements OnInit {
     uploadFile() {
         let formData = new FormData();
         formData.append('file', this.imageForm.get('file')?.value);
-        this.adminProductUpdateService.uploadImage(formData)
+        this.adminProductImageService.uploadImage(formData)
             .subscribe(result => this.image = result.filename);
     }
 
@@ -84,18 +77,5 @@ export class AdminProductUpdateComponent implements OnInit {
                 file: event.target.files[0]
             })
         }
-    }
-
-    private mapFormValues(product: AdminProductUpdate): void {
-        this.productForm.setValue({
-            name: product.name,
-            description: product.description,
-            fullDescription: product.fullDescription,
-            categoryId: product.categoryId,
-            price: product.price,
-            currency: product.currency,
-            slug: product.slug
-        });
-        this.image = product.image;
     }
 }
