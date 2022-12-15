@@ -16,6 +16,8 @@ import { AdminProductComponent } from 'src/app/modules/admin/admin-product/admin
 import { AdminComponent } from 'src/app/modules/admin/admin.component';
 import { MaterialModule } from 'src/app/shared/material.module';
 import { FullpageadminComponent } from './fullpageadmin.component';
+import { AdminReviewComponent } from 'src/app/modules/admin/admin-review/admin-review.component';
+import { AdminReviewUpdateComponent } from 'src/app/modules/admin/admin-review/admin-review-update/admin-review-update.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { FullpageadminComponent } from './fullpageadmin.component';
     AdminCategoryComponent,
     AdminCategoryAddComponent,
     AdminCategoryUpdateComponent,
-    AdminCategoryFormComponent
+    AdminCategoryFormComponent,
+    AdminReviewComponent,
+    AdminReviewUpdateComponent
   ],
   imports: [
     CommonModule,

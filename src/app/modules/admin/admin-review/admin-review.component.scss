@@ -1,0 +1,23 @@
+table {
+    width: 100%;
+}
+.mat-column-id {
+    width: 50px;
+}
+.mat-column-authorName {
+    width: 200px;
+}
+.mat-column-content {
+    width: auto;
+}
+.mat-column-actions {
+    text-align: center;
+    width: 140px;
+}
+.mat-column-moderated {
+    text-align: center;
+    width: 100px;
+}
+tr.product-row:hover {
+    background: whitesmoke;
+}

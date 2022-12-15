@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { AdminMessageService } from '../../common/service/admin-message.service';
 import { AdminCategoryService } from '../admin-category.service';
 import { AdminCategory } from '../model/adminCategory';
