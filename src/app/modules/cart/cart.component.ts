@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CookieOptions, CookieService } from 'ngx-cookie-service';
+import { CookieService } from 'ngx-cookie-service';
 import { CartIconService } from '../common/service/cart-icon.service';
 import { CartService } from './cart.service';
 import { CartSummary } from './model/cartSummary';
 import { CartSummaryItem } from './model/cartSummaryItem';
+import { Location } from '@angular/common'
 
 @Component({
     selector: 'app-cart',
@@ -16,21 +17,24 @@ export class CartComponent implements OnInit {
 
     summary!: CartSummary;
     formGroup!: FormGroup;
-
+    private isProductAdded = false;
     constructor(
         private route: ActivatedRoute,
         private cartService: CartService,
         private cookieService: CookieService,
         private router: Router,
         private formBuilder: FormBuilder,
-        private cartIconService: CartIconService
+        private cartIconService: CartIconService,
+        private location: Location
     ) { }
 
     ngOnInit(): void {
         let id = Number(this.route.snapshot.queryParams['productId']);
         if (id > 0) {
+            this.isProductAdded = true;
             this.addToCart(id);
         } else {
+            this.isProductAdded = false;
             this.getCart();
         }
         this.formGroup = this.formBuilder.group({
@@ -56,6 +60,7 @@ export class CartComponent implements OnInit {
             .subscribe(summary => {
                 this.summary = summary;
                 this.patchFormItems();
+               // this.isProductAdded = true;
                 this.cartIconService.cartChanged(summary.items.length);
                 this.cookieService.delete("cartId");
                 this.cookieService.set("cartId", summary.id.toString(), this.expiresDays(3));
@@ -75,20 +80,19 @@ export class CartComponent implements OnInit {
         })
     }
 
-    
+
     submit() {
         let cartId = Number(this.cookieService.get("cartId"));
         this.cartService.updateCart(cartId, this.mapToRewuestListDto())
-        .subscribe(summary => {
-            this.summary = summary;
-            this.formGroup.get("items")?.setValue(summary.items)
-        });
+            .subscribe(summary => {
+                this.summary = summary;
+                this.formGroup.get("items")?.setValue(summary.items)
+            });
     }
 
-    deleteItem(itemId: number){
-        console.log(itemId);
+    deleteItem(itemId: number) {
         this.cartService.deleteCartItem(itemId)
-        .subscribe(()=>this.ngOnInit());
+            .subscribe(() => this.ngOnInit());
     }
 
     expiresDays(days: number): Date {
@@ -105,6 +109,10 @@ export class CartComponent implements OnInit {
 
     get items() {
         return (<FormArray>this.formGroup.get("items")).controls;
+    }
+
+    backToPreviousPage() {
+        this.location.historyGo(this.isProductAdded ? -2 : -1);
     }
 
 }

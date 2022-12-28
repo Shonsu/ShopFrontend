@@ -39,6 +39,9 @@
             <div class="summary"> <b>{{summary?.summary?.grossValue}}</b></div>
         </div>
     </div>
+    <div fxLayoutAlign="start start">
+        <button mat-flat-button color="primary" (click)="backToPreviousPage()">Powrót do zakupów</button>
+    </div>
 </form>
 <div *ngIf="!summary?.items?.length">
     Koszyk jest pusty
