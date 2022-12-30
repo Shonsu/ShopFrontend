@@ -1,30 +1,30 @@
 <div fxLayout="column">
     <div fxLayout="row" fxFlex fxLayoutGap="20">
         <div>
-            <img *ngIf="!product?.image" src="/assets/image-placeholder.png" width="350">
-            <img *ngIf="product?.image" src="{{'/api/data/productImage/' + product.image}}" width="350">
+            <img *ngIf="!(product&&product.image)" src="/assets/image-placeholder.png" width="350">
+            <img *ngIf="product&&product.image" src="{{'/api/data/productImage/' + product.image}}" width="350">
         </div>
         <div fxLayout="column" fxFlex>
-            <h1>{{product?.name}}</h1>
-            <small>{{product?.category}}</small>
+            <h1>{{product&&product.name}}</h1>
+            <small>{{product&&product.category}}</small>
             <div class="description">
-                {{product?.description}}
+                {{product&&product.description}}
             </div>
             <div fxLayout="row" fxFlexAlign="end">
-                <span class="price">{{product?.price}} {{product?.currency}}</span>
+                <span class="price">{{product&&product.price}} {{product&&product.currency}}</span>
             </div>
-            <button mat-flat-button color="warn" routerLink="/cart" [queryParams]="{productId: product?.id}">Do koszyka</button>
+            <button mat-flat-button color="warn" routerLink="/cart" [queryParams]="{productId: product&&product.id}">Do koszyka</button>
         </div>
     </div>
     <div fxFlex>
-        {{product?.fullDescription}}
+        {{product&&product.fullDescription}}
     </div>
     <div>
         <h2>
             Opinie o produkcie
         </h2>
         <div>
-            <div *ngFor="let review of product?.reviews" class="review">
+            <div *ngFor="let review of product&&product.reviews" class="review">
                 <div>Autor: {{review.authorName}}</div>
                 <div>{{review.content}}</div>
             </div>

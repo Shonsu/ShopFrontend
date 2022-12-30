@@ -13,7 +13,7 @@
             <div *ngFor="let item of items; let i = index">
                 <div [formGroupName]="i" fxLayout="row" fxLayoutAlign="space-between start" class="card-row">
                     <div class="cart-col-1">
-                        <a routerLink="{{'/products/' + item.value}}">
+                        <a routerLink="{{'/products/' + item.value?.product?.slug}}">
                             <img *ngIf="!item.value?.product?.image" src="/assets/image-placeholder.png" width="50">
                             <img *ngIf="item.value?.product?.image"
                                 src="{{'/api/data/productImage/' + item.value?.product?.image}}" width="50">
@@ -38,9 +38,11 @@
             <div class="summary"> Wartość: </div>
             <div class="summary"> <b>{{summary?.summary?.grossValue}}</b></div>
         </div>
-    </div>
-    <div fxLayoutAlign="start start">
-        <button mat-flat-button color="primary" (click)="backToPreviousPage()">Powrót do zakupów</button>
+        <div>
+            <button mat-flat-button color="primary" (click)="backToPreviousPage()">Powrót do zakupów</button>
+        <span fxFlex ></span>
+            <button class="orderButton" mat-flat-button color="accent" type="button" routerLink="/order">Zamawiam</button>
+        </div>
     </div>
 </form>
 <div *ngIf="!summary?.items?.length">

@@ -4,9 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { CartIconService } from '../common/service/cart-icon.service';
 import { CartService } from './cart.service';
-import { CartSummary } from './model/cartSummary';
-import { CartSummaryItem } from './model/cartSummaryItem';
 import { Location } from '@angular/common'
+import { CartSummary } from '../common/model/cart/cartSummary';
+import { CartSummaryItem } from '../common/model/cart/cartSummaryItem';
 
 @Component({
     selector: 'app-cart',
@@ -83,11 +83,12 @@ export class CartComponent implements OnInit {
 
     submit() {
         let cartId = Number(this.cookieService.get("cartId"));
-        this.cartService.updateCart(cartId, this.mapToRewuestListDto())
+        this.cartService.updateCart(cartId, this.mapToRequestListDto())
             .subscribe(summary => {
                 this.summary = summary;
-                this.formGroup.get("items")?.setValue(summary.items)
+                this.formGroup.get("items")?.setValue(summary.items);
             });
+
     }
 
     deleteItem(itemId: number) {
@@ -99,7 +100,7 @@ export class CartComponent implements OnInit {
         return new Date(Date.now() + 24 * 60 * 60 * 1000);
     }
 
-    mapToRewuestListDto(): any[] {
+    mapToRequestListDto(): any[] {
         let items: Array<CartSummaryItem> = this.formGroup.get("items")?.value;
         return items.map(item => ({
             productId: item.product.id,

@@ -5,4 +5,5 @@ export interface CartSummaryItem{
     quantity: number,
     product: CartProduct,
     lineValue: number,
+    slug: string
 }
