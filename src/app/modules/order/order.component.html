@@ -18,66 +18,66 @@
                 <mat-label>Imię</mat-label>
                 <input matInput placeholder="Podaj imię" formControlName="firstname">
                 <div *ngIf="firstname?.invalid && (firstname?.dirty || firstname?.touched)" class="errorMessage">
-                <div *ngIf="firstname?.errors?.['required']">
-                    Imię jest wymagane
-                </div>
+                    <div *ngIf="firstname?.errors?.['required']">
+                        Imię jest wymagane
+                    </div>
                 </div>
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Nazwisko</mat-label>
                 <input matInput placeholder="Podaj nazwisko" formControlName="lastname">
                 <div *ngIf="lastname?.invalid && (lastname?.dirty || lastname?.touched)" class="errorMessage">
-                <div *ngIf="lastname?.errors?.['required']">
-                    Nazwisko jest wymagane
-                </div>
+                    <div *ngIf="lastname?.errors?.['required']">
+                        Nazwisko jest wymagane
+                    </div>
                 </div>
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Ulica</mat-label>
                 <input matInput placeholder="Podaj ulicę" formControlName="street">
                 <div *ngIf="street?.invalid && (street?.dirty || street?.touched)" class="errorMessage">
-                <div *ngIf="street?.errors?.['required']">
-                    Nazwa ulicy jest wymagana
-                </div>
+                    <div *ngIf="street?.errors?.['required']">
+                        Nazwa ulicy jest wymagana
+                    </div>
                 </div>
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Kod pocztkowy</mat-label>
                 <input matInput placeholder="Podaj kodpocztowy" formControlName="zipcode">
                 <div *ngIf="zipcode?.invalid && (zipcode?.dirty || zipcode?.touched)" class="errorMessage">
-                <div *ngIf="zipcode?.errors?.['required']">
-                    Kod pocztowy jest wymagany
-                </div>
+                    <div *ngIf="zipcode?.errors?.['required']">
+                        Kod pocztowy jest wymagany
+                    </div>
                 </div>
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Miasto</mat-label>
                 <input matInput placeholder="Podaj miasto" formControlName="city">
                 <div *ngIf="city?.invalid && (city?.dirty || city?.touched)" class="errorMessage">
-                <div *ngIf="city?.errors?.['required']">
-                    Miasto jest wymagane
-                </div>
+                    <div *ngIf="city?.errors?.['required']">
+                        Miasto jest wymagane
+                    </div>
                 </div>
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Email</mat-label>
                 <input type="email" matInput placeholder="Podaj email" formControlName="email">
                 <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="errorMessage">
-                <div *ngIf="email?.errors?.['required']">
-                    Email jest wymagany
-                </div>
-                <div *ngIf="email?.errors?.['email']">
-                    Podaj porawny format email
-                </div>
+                    <div *ngIf="email?.errors?.['required']">
+                        Email jest wymagany
+                    </div>
+                    <div *ngIf="email?.errors?.['email']">
+                        Podaj porawny format email
+                    </div>
                 </div>
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Telefon</mat-label>
                 <input matInput placeholder="Podaj telefon" formControlName="phone">
                 <div *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)" class="errorMessage">
-                <div *ngIf="phone?.errors?.['required']">
-                    Telefon jest wymagany
-                </div>
+                    <div *ngIf="phone?.errors?.['required']">
+                        Telefon jest wymagany
+                    </div>
                 </div>
             </mat-form-field>
         </div>
@@ -91,12 +91,13 @@
                         <div class="cart-hcol-3">Ilość</div>
                         <div class="cart-hcol-4">Wartość</div>
                     </div>
-                    <div *ngFor="let item of cartSummary.items; let i = index"  class="card-row">
+                    <div *ngFor="let item of cartSummary.items; let i = index" class="card-row">
                         <div fxLayout="row" fxLayoutAlign="space-between start">
                             <div class="cart-col-1">
                                 <a routerLink="{{'/products/' + item.product?.slug}}">
                                     <img *ngIf="!item.product?.image" src="/assets/image-placeholder.png" width="100">
-                                    <img *ngIf="item.product?.image" src="{{'/api/data/productImage/' + item.product.image}}" width="100">
+                                    <img *ngIf="item.product?.image"
+                                        src="{{'/api/data/productImage/' + item.product.image}}" width="100">
                                 </a>
                             </div>
                             <div class="cart-col-2">{{item.product.name}}</div>
@@ -107,6 +108,22 @@
                     <div fxLayoutAlign="end start">
                         <div class="summary"> Wartość: </div>
                         <div class="summary"> <b>{{cartSummary.summary.grossValue}}</b></div>
+                    </div>
+                    <div>
+                        <h2>Dostawa</h2>
+                        <mat-radio-group fxLayout="column" formControlName="shipment">
+                            <mat-radio-button class="shipmentRadioButton" *ngFor="let shipment of initData?.shipment"
+                                [value]="shipment" [checked]="shipment.defaultShipment">
+                                <span class="shipment-1">{{shipment.name}}</span>
+                                <span class="shipment-2">{{shipment.price}} PLN</span>
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                </div>
+                <div fxLayoutAlign="end">
+                    <div class="orderTotal"> Całkowita kwota do zapłaty:
+                        <span class="orderTotalValue"> {{cartSummary?.summary?.grossValue + shipment?.value.price}} PLN
+                        </span>
                     </div>
                 </div>
                 <div fxLayoutAlign="end start">

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { CartSummary } from '../common/model/cart/cartSummary';
+import { InitData } from './model/initData';
 import { OrderDto } from './model/orderDto';
 import { OrderSummary } from './model/orderSummary';
 import { OrderService } from './order.service';
@@ -16,6 +17,8 @@ export class OrderComponent implements OnInit {
     cartSummary!: CartSummary;
     formGroup!: FormGroup;
     orderSummary!: OrderSummary;
+    initData!: InitData;
+
     private statuses = new Map<string, string>([
         ["NEW", "Nowe"],
     ])
@@ -36,7 +39,9 @@ export class OrderComponent implements OnInit {
             city: ['', [Validators.required]],
             email: ['', [Validators.required, Validators.email]],
             phone: ['', [Validators.required]],
+            shipment: ['', [Validators.required]]
         });
+        this.getInitData();
     }
 
     checkCartEmpty() {
@@ -55,7 +60,8 @@ export class OrderComponent implements OnInit {
                 city: this.formGroup.get('city')?.value,
                 email: this.formGroup.get('email')?.value,
                 phone: this.formGroup.get('phone')?.value,
-                cartId: Number(this.cookieService.get("cartId"))
+                cartId: Number(this.cookieService.get("cartId")),
+                shipmentId: Number(this.formGroup.get('shipment')?.value.id)
             } as OrderDto)
                 .subscribe(orderSummary => {
                     this.orderSummary = orderSummary;
@@ -63,7 +69,24 @@ export class OrderComponent implements OnInit {
                 });
         }
     }
-    getStatus(status: string){
+
+    getInitData() {
+        this.orderService.getInitData()
+            .subscribe(initData => {
+                this.initData = initData;
+                this.setDefaultShipment();
+            });
+    }
+
+    setDefaultShipment() {
+        this.formGroup.patchValue({
+            "shipment": this.initData.shipment
+                .filter(shipment => shipment.defaultShipment === true)[0]
+        })
+    }
+
+
+    getStatus(status: string) {
         return this.statuses.get(status);
     }
 
@@ -88,5 +111,8 @@ export class OrderComponent implements OnInit {
     get phone() {
         return this.formGroup.get("phone");
     }
-
+    get shipment() {
+        return this, this.formGroup.get("shipment");
+    }
 }
+
