@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
+import { filter } from 'rxjs';
 import { CartSummary } from '../common/model/cart/cartSummary';
 import { InitData } from './model/initData';
 import { OrderDto } from './model/orderDto';
@@ -39,7 +40,8 @@ export class OrderComponent implements OnInit {
             city: ['', [Validators.required]],
             email: ['', [Validators.required, Validators.email]],
             phone: ['', [Validators.required]],
-            shipment: ['', [Validators.required]]
+            shipment: ['', [Validators.required]],
+            payment: ['', [Validators.required]]
         });
         this.getInitData();
     }
@@ -61,7 +63,8 @@ export class OrderComponent implements OnInit {
                 email: this.formGroup.get('email')?.value,
                 phone: this.formGroup.get('phone')?.value,
                 cartId: Number(this.cookieService.get("cartId")),
-                shipmentId: Number(this.formGroup.get('shipment')?.value.id)
+                shipmentId: Number(this.formGroup.get('shipment')?.value.id),
+                paymentId: Number(this.formGroup.get('payment')?.value.id)
             } as OrderDto)
                 .subscribe(orderSummary => {
                     this.orderSummary = orderSummary;
@@ -75,7 +78,14 @@ export class OrderComponent implements OnInit {
             .subscribe(initData => {
                 this.initData = initData;
                 this.setDefaultShipment();
+                this.setDefaultPayment();
             });
+    }
+    setDefaultPayment() {
+        this.formGroup.patchValue({
+            "payment": this.initData.payment
+            .filter(payment => payment.defaultPayment === true)[0]
+        })
     }
 
     setDefaultShipment() {
@@ -113,6 +123,9 @@ export class OrderComponent implements OnInit {
     }
     get shipment() {
         return this, this.formGroup.get("shipment");
+    }
+    get payment() {
+        return this, this.formGroup.get("payment");
     }
 }
 
