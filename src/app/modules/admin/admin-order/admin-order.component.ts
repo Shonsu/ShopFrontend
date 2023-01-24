@@ -15,13 +15,14 @@ export class AdminOrderComponent implements AfterViewInit {
     displayedColumns: string[] = ["id", "placeDate", "orderStatus", "grossValue", "actions"];
     data: Array<AdminOrder> = [];
     totalElements: number = 0;
-
+    statuses!: Map<string, string>;
 
     constructor(
         private adminOrderService: AdminOrderService
     ) { }
 
     ngAfterViewInit(): void {
+        this.getInitData();
         this.getOrders();
     }
 
@@ -41,4 +42,12 @@ export class AdminOrderComponent implements AfterViewInit {
         ).subscribe(data => (this.data = data));
     }
 
+    getInitData(){
+        this.adminOrderService.getInitData()
+        .subscribe(data => this.statuses = new Map(Object.entries(data.orderStatuses)));
+    }
+
+    resolveStatus(status: string){
+        return this.statuses?.get(status);
+    }
 }
