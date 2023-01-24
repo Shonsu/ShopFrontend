@@ -7,6 +7,7 @@ import { InitData } from './model/initData';
 import { OrderDto } from './model/orderDto';
 import { OrderSummary } from './model/orderSummary';
 import { OrderService } from './order.service';
+import { CartIconService } from '../common/service/cart-icon.service';
 
 @Component({
     selector: 'app-order',
@@ -19,7 +20,7 @@ export class OrderComponent implements OnInit {
     formGroup!: FormGroup;
     orderSummary!: OrderSummary;
     initData!: InitData;
-
+    errorMessage = false;
     private statuses = new Map<string, string>([
         ["NEW", "Nowe"],
     ])
@@ -27,7 +28,8 @@ export class OrderComponent implements OnInit {
     constructor(
         private cookieService: CookieService,
         private orderService: OrderService,
-        private formBuilder: FormBuilder
+        private formBuilder: FormBuilder,
+        private cartIconService: CartIconService
     ) { }
 
     ngOnInit(): void {
@@ -66,9 +68,14 @@ export class OrderComponent implements OnInit {
                 shipmentId: Number(this.formGroup.get('shipment')?.value.id),
                 paymentId: Number(this.formGroup.get('payment')?.value.id)
             } as OrderDto)
-                .subscribe(orderSummary => {
-                    this.orderSummary = orderSummary;
-                    this.cookieService.delete("cartId");
+                .subscribe({
+                    next: orderSummary => {
+                        this.orderSummary = orderSummary;
+                        this.cookieService.delete("cartId");
+                        this.cartIconService.cartChanged(0);
+                        this.errorMessage = false;
+                    },
+                    error: err => this.errorMessage = true
                 });
         }
     }
@@ -84,7 +91,7 @@ export class OrderComponent implements OnInit {
     setDefaultPayment() {
         this.formGroup.patchValue({
             "payment": this.initData.payment
-            .filter(payment => payment.defaultPayment === true)[0]
+                .filter(payment => payment.defaultPayment === true)[0]
         })
     }
 

@@ -18,6 +18,8 @@ import { MaterialModule } from 'src/app/shared/material.module';
 import { FullpageadminComponent } from './fullpageadmin.component';
 import { AdminReviewComponent } from 'src/app/modules/admin/admin-review/admin-review.component';
 import { AdminReviewUpdateComponent } from 'src/app/modules/admin/admin-review/admin-review-update/admin-review-update.component';
+import { AdminOrderComponent } from 'src/app/modules/admin/admin-order/admin-order.component';
+import { AdminOrderUpdateComponent } from 'src/app/modules/admin/admin-order/admin-order-update/admin-order-update.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { AdminReviewUpdateComponent } from 'src/app/modules/admin/admin-review/a
     AdminCategoryUpdateComponent,
     AdminCategoryFormComponent,
     AdminReviewComponent,
-    AdminReviewUpdateComponent
+    AdminReviewUpdateComponent,
+    AdminOrderComponent,
+    AdminOrderUpdateComponent
   ],
   imports: [
     CommonModule,

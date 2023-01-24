@@ -1,0 +1,17 @@
+table {
+    width: 100%;
+}
+.mat-column-id {
+    width: 60px;
+}
+.mat-column-actions {
+    width: 120px;
+}
+.status-NEW{
+    background-color: rgb(217, 252, 223);
+    padding: 7px;
+}
+
+tr.product-row:hover {
+    background: whitesmoke;
+}
