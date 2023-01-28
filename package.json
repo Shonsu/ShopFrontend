@@ -23,6 +23,8 @@
     "@angular/platform-browser-dynamic": "^14.2.12",
     "@angular/router": "^14.2.12",
     "chart.js": "^4.2.0",
+    "chartjs-adapter-date-fns": "^3.0.0",
+    "date-fns": "^2.29.3",
     "ngx-cookie-service": "^14.0.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",

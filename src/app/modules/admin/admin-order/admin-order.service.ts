@@ -31,4 +31,8 @@ export class AdminOrderService {
     exportOrders(from: string, to: string, orderStatus: string): Observable<any> {
         return this.http.get(`/api/admin/orders/export?from=${from}&to=${to}&orderStatus=${orderStatus}`, { responseType: 'blob', observe: 'response' });
     }
+
+    getSalesStatistics(): Observable<any> {
+        return this.http.get<any>("/api/admin/orders/stats");
+    }
 }
