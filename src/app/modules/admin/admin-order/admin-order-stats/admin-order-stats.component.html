@@ -1,3 +1,46 @@
+<form [formGroup]="formGroup" fxLayoutAlign="start left" (submit)="submit()" fxLayout="column">
+    <mat-radio-group aria-label="Select an option" class="example-radio-group" formControlName="chartType">
+        <div><span>Wybierze satatus:</span>
+            <mat-form-field appearance="fill">
+                <mat-label>Status</mat-label>
+                <mat-select formControlName="orderStatus">
+                    <mat-option *ngFor="let status of statuses | keyvalue"
+                        [value]="status.key">{{status.value}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <mat-radio-button value="CUSTOM_PERIOD" class="example-radio-button">
+            <span>Wybrany okres:</span>
+            <mat-form-field appearance="fill">
+                <mat-label>Od</mat-label>
+                <input matInput placeholder="Podaj datę od" formControlName="from" [matDatepicker]="from">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle>
+                <mat-datepicker #from></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Do</mat-label>
+                <input matInput placeholder="Podaj datę do" formControlName="to" [matDatepicker]="to">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="to"></mat-datepicker-toggle>
+                <mat-datepicker #to></mat-datepicker>
+            </mat-form-field>
+        </mat-radio-button>
+
+        <mat-radio-button value="PREDEFINED_PERIOD" class="example-radio-button">
+            <span>Predefiniowane okresy:</span>
+            <mat-form-field appearance="fill">
+                <mat-label>Status</mat-label>
+                <mat-select formControlName="period">
+                    <mat-option *ngFor="let period of periods" [value]="period">{{period}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </mat-radio-button>
+    </mat-radio-group>
+    <div fxLayoutAlign="start">
+        <button mat-flat-button color="primary">Pokaż</button>
+    </div>
+</form>
 <canvas id="stats" class="chartCanvas" style="width: 100%; height: 600px;" #stats></canvas>
 <div>
     <div>Ilość zamówień w tym okresie: <b>{{ordersCount}}</b></div>
