@@ -79,8 +79,8 @@ export class AdminOrderStatsComponent implements OnInit, AfterViewInit {
                 this.data.datasets[0].data = stats.order;
                 this.data.datasets[1].data = stats.sale;
                 this.chart.update();
-                this.ordersCount = stats.order.reduce((acc: number, value: number) => acc + value);
-                this.salesSum = stats.sale.reduce((acc: number, value: number) => acc + value);
+                this.ordersCount = stats.ordersCount;
+                this.salesSum = stats.salesSum;
             });
     }
 
@@ -158,7 +158,7 @@ export class AdminOrderStatsComponent implements OnInit, AfterViewInit {
             case Period.LAST_MONTH: {
                 dateFrom.setMonth(dateFrom.getMonth() - 1);
                 dateFrom.setDate(1);
-                dateTo = new Date(dateTo.getFullYear(), dateTo.getMonth() - 1, 0, 23, 59, 59);
+                dateTo = new Date(dateTo.getFullYear(), dateTo.getMonth(), 0, 23, 59, 59);
                 queryPeriod = {
                     from: new Date(dateFrom),
                     to: dateTo
