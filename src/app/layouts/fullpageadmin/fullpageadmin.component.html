@@ -1,7 +1,10 @@
-<header flexLayout="column" fxLayoutAlign="start center">
+<header flexLayout="row" fxLayoutAlign="start center">
     <div fxFlex fxLayoutAlign="start center" fxLayoutGap="15">
         <mat-icon color="accent" class="logoIcon">store</mat-icon>
         <span class="logo">Shop panel</span>
+    </div>
+    <div fxLayoutGap="15" fxLayoutAlign="start center">
+        <button mat-flat-button (click)="logout()">Wyloguj</button>
     </div>
 </header>
 <div flexLayout="row" fxFlex>

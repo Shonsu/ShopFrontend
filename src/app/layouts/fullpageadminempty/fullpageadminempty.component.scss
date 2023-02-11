@@ -1,0 +1,19 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin: 0 auto;
+    div{
+        margin-top: 25px;
+    }
+}
+.logo {
+    font-size: 24px;
+    color: black;
+}
+
+.loginicon{
+    font-size: 30px;
+    height: 30px;
+    width: 30px;
+}
