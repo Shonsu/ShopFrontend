@@ -10,8 +10,8 @@ import { DefaultModule } from './layouts/default/default.module';
 import { FullpageModule } from './layouts/fullpage/fullpage.module';
 import { FullpageadminModule } from './layouts/fullpageadmin/fullpageadmin.module';
 import { FullpageadminemptyModule } from './layouts/fullpageadminempty/fullpageadminempty.module';
-import { JwtInterceptor } from './modules/common/interceptor/jwt.interceptor';
 import { AdminAuthorizeGuard } from './modules/admin/common/guard/adminAuthorizeGuard';
+import { JwtInterceptor } from './modules/common/interceptor/jwt.interceptor';
 
 @NgModule({
     declarations: [

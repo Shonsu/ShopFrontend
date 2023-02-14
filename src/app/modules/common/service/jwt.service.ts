@@ -4,7 +4,7 @@ import jwtDecode from 'jwt-decode';
     providedIn: 'root'
 })
 export class JwtService {
-
+    adminAccess = false;
     constructor() { }
 
     setToken(token: string) {
@@ -20,15 +20,24 @@ export class JwtService {
         return token != null && this.notExpired(token);
     }
 
-    notExpired(token: any): boolean {
+    private notExpired(token: any): boolean {
         let tokenDocoded = jwtDecode<any>(token);
         return (tokenDocoded.exp * 1000) > new Date().getTime();
     }
 
-    removeToken(){
+    removeToken() {
         let token = localStorage.getItem("token");
-        if(token){
+        if (token) {
             localStorage.removeItem("token");
         }
     }
+
+    public setAdminAccess(adminAccess: boolean) {
+        this.adminAccess = adminAccess;
+    }
+    public getAdminAccess(): boolean {
+        return this.adminAccess;
+    }
+
+
 }

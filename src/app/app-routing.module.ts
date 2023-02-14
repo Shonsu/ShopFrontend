@@ -26,6 +26,7 @@ import { LoginComponent } from './modules/login/login.component';
 import { OrderComponent } from './modules/order/order.component';
 import { ProductDetailsComponent } from './modules/product-details/product-details.component';
 import { ProductComponent } from './modules/product/product.component';
+import { ProfileComponent } from './modules/profile/profile.component';
 
 const routes: Routes = [
     {
@@ -35,7 +36,9 @@ const routes: Routes = [
             { path: 'products/:slug', component: ProductDetailsComponent },
             { path: 'categories/:slug', component: CategoryComponent },
             { path: 'cart', component: CartComponent },
-            { path: 'order', component: OrderComponent }
+            { path: 'order', component: OrderComponent },
+            { path: 'profile', component: ProfileComponent }
+
         ]
     },
     {
