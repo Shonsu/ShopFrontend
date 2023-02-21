@@ -7,7 +7,11 @@
         <button mat-flat-button routerLink="">Strona główna</button>
         <button mat-flat-button routerLink="/products">Produkty</button>
         <span></span>
-        <button mat-flat-button routerLink="/login">Zaloguj</button>
-        <a routerLink="/cart"><mat-icon color="accent" class="shoppingBasket" matBadge="{{cartProductCounter}}" matBadgeColor="warn" MatBadgeSize="small">shopping_basket</mat-icon></a>
+        <button mat-flat-button routerLink="/login">
+            <span *ngIf="!isLoggedIn">Zaloguj</span>
+            <span *ngIf="isLoggedIn">Profil</span>
+        </button>
+        <a routerLink="/cart"><mat-icon color="accent" class="shoppingBasket" matBadge="{{cartProductCounter}}"
+                matBadgeColor="warn" MatBadgeSize="small">shopping_basket</mat-icon></a>
     </div>
 </header>

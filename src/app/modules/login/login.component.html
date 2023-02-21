@@ -16,7 +16,7 @@
     </div>
     <div fxFlex>
         <h2>Rejestracja</h2>
-        <form [formGroup]="registerForm" fxLayout="column" (submit)="register()" class="loginForm">
+        <form [formGroup]="registerForm" fxLayout="column" (submit)="register()" class="registerForm">
             <div *ngIf="registerError" class="error">{{registerErrorMessage}}</div>
             <mat-form-field appearance="fill">
                 <mat-label>Email</mat-label>
