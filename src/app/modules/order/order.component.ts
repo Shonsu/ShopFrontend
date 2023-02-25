@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
-import { filter } from 'rxjs';
 import { CartSummary } from '../common/model/cart/cartSummary';
+import { CartIconService } from '../common/service/cart-icon.service';
+import { JwtService } from '../common/service/jwt.service';
 import { InitData } from './model/initData';
 import { OrderDto } from './model/orderDto';
 import { OrderSummary } from './model/orderSummary';
 import { OrderService } from './order.service';
-import { CartIconService } from '../common/service/cart-icon.service';
-import { JwtService } from '../common/service/jwt.service';
 
 @Component({
     selector: 'app-order',

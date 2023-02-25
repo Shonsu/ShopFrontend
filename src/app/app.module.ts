@@ -11,8 +11,8 @@ import { FullpageModule } from './layouts/fullpage/fullpage.module';
 import { FullpageadminModule } from './layouts/fullpageadmin/fullpageadmin.module';
 import { FullpageadminemptyModule } from './layouts/fullpageadminempty/fullpageadminempty.module';
 import { AdminAuthorizeGuard } from './modules/admin/common/guard/adminAuthorizeGuard';
-import { JwtInterceptor } from './modules/common/interceptor/jwt.interceptor';
 import { ProfileAuthorizeGuard } from './modules/common/guard/profileAuthorizeGuard';
+import { JwtInterceptor } from './modules/common/interceptor/jwt.interceptor';
 
 @NgModule({
     declarations: [
