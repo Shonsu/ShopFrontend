@@ -58,7 +58,7 @@ export class ResetPasswordComponent implements OnInit {
                 .subscribe({
                     next: () => {
                         this.actionMessage = "Hasło zostało zmienione.",
-                        this.router.navigate(["/login"])
+                        this.router.navigate(["/resetPassword"])
                     },
                     error: err => {
                         this.actionMessage = 'Hasło nie zostało zmienione, spróbuj jeszcze raz.</br><a href="/resetPassword">Reset hasła</a>';

@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy.config.json",
+    "start": "node server.js",
+    "dev": "ng serve --proxy-config proxy.config.json",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -25,8 +26,11 @@
     "chart.js": "^4.2.0",
     "chartjs-adapter-date-fns": "^3.0.0",
     "date-fns": "^2.29.3",
+    "express": "^4.18.2",
+    "http-proxy-middleware": "^2.0.6",
     "jwt-decode": "^3.1.2",
     "ngx-cookie-service": "^14.0.1",
+    "path": "^0.12.7",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
@@ -43,5 +47,9 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
     "typescript": "~4.7.2"
+  },
+  "engines": {
+    "node": "v16.18.1",
+    "npm": "8.19.2"
   }
 }
