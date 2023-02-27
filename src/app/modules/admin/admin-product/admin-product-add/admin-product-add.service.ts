@@ -12,6 +12,6 @@ export class AdminProductAddService {
     constructor(private http: HttpClient) { }
     
     saveNewProduct(product: AdminProductUpdate): Observable<AdminProductUpdate> {
-        return this.http.post<AdminProductUpdate>("api/admin/products", product);
+        return this.http.post<AdminProductUpdate>("/api/admin/products", product);
     }
 }
