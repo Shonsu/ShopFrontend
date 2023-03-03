@@ -7,6 +7,7 @@ export interface ProductDetails{
     fullDescription: string,
     category: string,
     price: number,
+    salePrice: number,
     currency: string,
     image: string,
     slug: string,

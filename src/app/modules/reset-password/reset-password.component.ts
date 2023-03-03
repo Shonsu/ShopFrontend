@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { matchPasswordValidator } from './matchPasswordValidator';
+import { matchPasswordValidator } from '../common/validators/matchPasswordValidator';
 import { ResetPasswordService } from './reset-password.service';
 
 @Component({

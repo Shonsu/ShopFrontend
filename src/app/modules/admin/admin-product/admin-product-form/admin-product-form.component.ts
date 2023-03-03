@@ -77,7 +77,15 @@ import { FormCategoryService } from "./form-category.service";
                     Cena musi być większa od zera
                 </div>
             </div>
-            
+        </mat-form-field> 
+            <mat-form-field appearance="fill">
+            <mat-label>Cena promocyjna</mat-label>
+            <input matInput placeholder="Podaj cenę promocyjną produktu" formControlName="salePrice">
+            <div *ngIf="salePrice?.invalid && (salePrice?.dirty || salePrice?.touched\)" class="errorMessages">
+                <div *ngIf="salePrice?.errors?.['min']">
+                    Cena musi być większa od zera
+                </div>
+            </div>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
@@ -133,6 +141,9 @@ export class AdminProductFormComponent implements OnInit {
 
     get price() {
         return this.parentForm.get("price");
+    }    
+    get salePrice() {
+        return this.parentForm.get("salePrice");
     }
 
     get currency() {

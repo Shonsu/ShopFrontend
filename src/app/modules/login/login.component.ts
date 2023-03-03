@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { JwtService } from '../common/service/jwt.service';
+import { matchPasswordValidator } from '../common/validators/matchPasswordValidator';
 import { LoginService } from './login.service';
 
 @Component({
@@ -33,12 +34,15 @@ export class LoginComponent implements OnInit {
 
         this.loginForm = this.formBuilder.group({
             username: ['', [Validators.required, Validators.email]],
-            password: ['', Validators.required]
+            password: ['', Validators.required, Validators.minLength(8)]
         });
         this.registerForm = this.formBuilder.group({
             username: ['', [Validators.required, Validators.email]],
-            password: ['', Validators.required],
-            repeatPassword: ['', Validators.required]
+            password: ['', Validators.required, Validators.minLength(8)],
+            repeatedPassword: ['', Validators.required, Validators.minLength(8)]
+        },
+        {
+            validators: matchPasswordValidator
         });
     }
 
@@ -78,12 +82,20 @@ export class LoginComponent implements OnInit {
         }
     }
     private isPasswordIdentical(register: any): boolean {
-        if (register.password === register.repeatPassword) {
+        if (register.password === register.repeatedPassword) {
             this.registerError = false;
             return true;
         }
         this.registerError = true;
         this.registerErrorMessage = "Hasła nie są identyczne";
         return false;
+    }
+
+    get password() {
+        return this.registerForm.get("password");
+    }
+
+    get repeatedPassword() {
+        return this.registerForm.get("repeatedPassword");
     }
 }

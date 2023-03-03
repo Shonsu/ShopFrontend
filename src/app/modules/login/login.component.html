@@ -11,7 +11,7 @@
                 <mat-label>Hasło</mat-label>
                 <input type="password" matInput formControlName="password">
             </mat-form-field>
-            <button mat-flat-button color="primary">Zaloguj</button>
+            <button mat-flat-button color="primary" [disabled]="!loginForm.valid">Zaloguj</button>
             <div class="resetPassword"> Nie pamiętasz hasła? <a routerLink="/resetPassword">Zresetuj</a>.</div>
         </form>
        
@@ -19,6 +19,9 @@
     <div fxFlex>
         <h2>Rejestracja</h2>
         <form [formGroup]="registerForm" fxLayout="column" (submit)="register()" class="registerForm">
+            <div *ngIf="registerForm.errors?.['passwordMatch'] && (registerForm.touched || registerForm.dirty)">
+                Hasła nie pasują do siebie.
+            </div>
             <div *ngIf="registerError" class="error">{{registerErrorMessage}}</div>
             <mat-form-field appearance="fill">
                 <mat-label>Email</mat-label>
@@ -26,13 +29,18 @@
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Hasło</mat-label>
-                <input type="password" matInput formControlName="password" placeholder="Podaj swój email">
+                <input type="password" matInput formControlName="password" placeholder="Podaj hasło">
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Powtórz hasło</mat-label>
-                <input type="password" matInput formControlName="repeatPassword" placeholder="Powtórz hasło">
+                <input type="password" matInput formControlName="repeatedPassword" placeholder="Powtórz hasło">
+                <div *ngIf="repeatedPassword?.invalid && (repeatedPassword?.dirty || repeatedPassword?.touched)" >
+                    <div *ngIf="repeatedPassword?.errors?.['minlength']">
+                        Hasło musi mieć przynajmniej 8 znaków.
+                    </div>
+                </div>
             </mat-form-field>
-            <button mat-flat-button color="primary">Zarejestruj</button>
+            <button mat-flat-button color="primary" [disabled]="!registerForm.valid">Zarejestruj</button>
         </form>
     </div>
 </div>

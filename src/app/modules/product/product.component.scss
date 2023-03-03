@@ -26,3 +26,14 @@ a{
 a:hover{
     color: #777;
 }
+.productSalePrice{
+    font-size: 30px;
+    font-weight: 500;
+    margin-top: 20px;
+    color: green;
+}
+.productPricedisable{
+    color: lightgray;
+    text-decoration: line-through;
+    font-size: 22px;
+}
