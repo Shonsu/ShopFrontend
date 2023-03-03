@@ -15,6 +15,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import {MatProgressSpinnerModule, MAT_PROGRESS_SPINNER_DEFAULT_OPTIONS} from '@angular/material/progress-spinner';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 @NgModule({
     declarations: [],
     imports: [
@@ -33,7 +34,8 @@ import {MatProgressSpinnerModule, MAT_PROGRESS_SPINNER_DEFAULT_OPTIONS} from '@a
         MatRadioModule,
         MatDatepickerModule,
         MatMomentDateModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        MatCheckboxModule
         
     ],
     exports: [
@@ -51,7 +53,8 @@ import {MatProgressSpinnerModule, MAT_PROGRESS_SPINNER_DEFAULT_OPTIONS} from '@a
         MatRadioModule,
         MatDatepickerModule,
         MatMomentDateModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        MatCheckboxModule
     ],
     providers: [
         { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } }

@@ -6,6 +6,7 @@ export interface AdminProductUpdate {
     categoryId: number,
     price: number,
     salePrice: number,
+    inSalePlace: boolean,
     currency: string,
     slug: string,
     image: string

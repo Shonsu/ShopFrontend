@@ -78,16 +78,18 @@ import { FormCategoryService } from "./form-category.service";
                 </div>
             </div>
         </mat-form-field> 
+        <div fxLayout="row" fxLayoutAlign="start center" >
             <mat-form-field appearance="fill">
-            <mat-label>Cena promocyjna</mat-label>
-            <input matInput placeholder="Podaj cenę promocyjną produktu" formControlName="salePrice">
-            <div *ngIf="salePrice?.invalid && (salePrice?.dirty || salePrice?.touched\)" class="errorMessages">
-                <div *ngIf="salePrice?.errors?.['min']">
-                    Cena musi być większa od zera
+                <mat-label>Cena promocyjna</mat-label>
+                <input matInput placeholder="Podaj cenę promocyjną produktu" formControlName="salePrice">
+                <div *ngIf="salePrice?.invalid && (salePrice?.dirty || salePrice?.touched\)" class="errorMessages">
+                    <div *ngIf="salePrice?.errors?.['min']">
+                        Cena musi być większa od zera
+                    </div>
                 </div>
-            </div>
-        </mat-form-field>
-
+            </mat-form-field>
+            <mat-checkbox class="inSalePlace1" formControlName="inSalePlace">Pokaż w ofertach promocyjnych</mat-checkbox>
+        </div>
         <mat-form-field appearance="fill">
             <mat-label>Waluta</mat-label>
             <input matInput placeholder="Podaj walutę produktu" formControlName="currency">
@@ -107,6 +109,10 @@ import { FormCategoryService } from "./form-category.service";
             color: red;
             font-style: italic;
             padding-top: 5px;
+        }
+        .inSalePlace1{
+            margin-left: 25px;
+            margin-bottom: 10px;
         }
         `]
 
@@ -141,9 +147,13 @@ export class AdminProductFormComponent implements OnInit {
 
     get price() {
         return this.parentForm.get("price");
-    }    
+    }
     get salePrice() {
         return this.parentForm.get("salePrice");
+    }
+
+    get inSalePlace() {
+        return this.parentForm.get("inSalePlace");
     }
 
     get currency() {
@@ -157,4 +167,5 @@ export class AdminProductFormComponent implements OnInit {
     get fullDescription() {
         return this.parentForm.get("fullDescription");
     }
+
 }
