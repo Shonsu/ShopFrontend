@@ -23,7 +23,7 @@ export class AdminLoginComponent implements OnInit {
     ngOnInit(): void {
         this.formGroup = this.formBuilder.group({
             username: ['', Validators.required],
-            password: ['', Validators.required]
+            loginPassword: ['', Validators.required]
         })
     }
 
