@@ -6,10 +6,23 @@
             <mat-form-field appearance="fill">
                 <mat-label>Email</mat-label>
                 <input matInput formControlName="username" placeholder="Podaj swój email">
+                <div *ngIf="username?.invalid && (username?.dirty || username?.touched)" >
+                    <div *ngIf="username?.errors?.['email']">
+                        Podaj poprawny email.
+                    </div>
+                </div>
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Hasło</mat-label>
-                <input type="password" matInput formControlName="password">
+                <input type="password" matInput formControlName="loginPassword">
+                <div *ngIf="loginPassword?.invalid && (loginPassword?.dirty || loginPassword?.touched)" >
+                    <div *ngIf="loginPassword?.errors?.['minlength']">
+                        Hasło musi posiadać przynajmniej 8 zmaków.
+                    </div>
+                    <div *ngIf="loginPassword?.errors?.['required']">
+                        Hasło nie może być puste.
+                    </div>
+                </div>
             </mat-form-field>
             <button mat-flat-button color="primary" [disabled]="!loginForm.valid">Zaloguj</button>
             <div class="resetPassword"> Nie pamiętasz hasła? <a routerLink="/resetPassword">Zresetuj</a>.</div>
@@ -25,11 +38,21 @@
             <div *ngIf="registerError" class="error">{{registerErrorMessage}}</div>
             <mat-form-field appearance="fill">
                 <mat-label>Email</mat-label>
-                <input matInput formControlName="username" placeholder="Podaj swój email">
+                <input matInput formControlName="registerUsername" placeholder="Podaj swój email">
+                <div *ngIf="registerUsername?.invalid && (registerUsername?.dirty || registerUsername?.touched)" >
+                    <div *ngIf="registerUsername?.errors?.['email']">
+                        Podaj poprawny email.
+                    </div>
+                </div>
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Hasło</mat-label>
                 <input type="password" matInput formControlName="password" placeholder="Podaj hasło">
+                <div *ngIf="password?.invalid && (password?.dirty || password?.touched)" >
+                    <div *ngIf="password?.errors?.['minlength']">
+                        Hasło musi mieć przynajmniej 8 znaków.
+                    </div>
+                </div>
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Powtórz hasło</mat-label>

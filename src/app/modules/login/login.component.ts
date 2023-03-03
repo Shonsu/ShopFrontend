@@ -34,16 +34,16 @@ export class LoginComponent implements OnInit {
 
         this.loginForm = this.formBuilder.group({
             username: ['', [Validators.required, Validators.email]],
-            password: ['', Validators.required, Validators.minLength(8)]
+            loginPassword: ['', [Validators.required, Validators.minLength(8)]]
         });
         this.registerForm = this.formBuilder.group({
-            username: ['', [Validators.required, Validators.email]],
-            password: ['', Validators.required, Validators.minLength(8)],
-            repeatedPassword: ['', Validators.required, Validators.minLength(8)]
+            registerUsername: ['', [Validators.required, Validators.email]],
+            password: ['', [Validators.required, Validators.minLength(8)]],
+            repeatedPassword: ['', [Validators.required, Validators.minLength(8)]]
         },
-        {
-            validators: matchPasswordValidator
-        });
+            {
+                validators: matchPasswordValidator
+            });
     }
 
     login() {
@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
                         this.router.navigate([this.REDIRECT_ROUTE]);
                         this.loginError = false;
                     },
-                    error: ()=>{
+                    error: () => {
                         this.loginError = true;
                     }
                 });
@@ -82,7 +82,7 @@ export class LoginComponent implements OnInit {
         }
     }
     private isPasswordIdentical(register: any): boolean {
-        if (register.password === register.repeatedPassword) {
+        if (register.resetPassword === register.resetRepeatedPassword) {
             this.registerError = false;
             return true;
         }
@@ -91,10 +91,18 @@ export class LoginComponent implements OnInit {
         return false;
     }
 
+    get loginPassword() {
+        return this.loginForm.get("loginPassword");
+    }
+    get username() {
+        return this.loginForm.get("username");
+    }
+    get registerUsername() {
+        return this.registerForm.get("registerUsername");
+    }
     get password() {
         return this.registerForm.get("password");
     }
-
     get repeatedPassword() {
         return this.registerForm.get("repeatedPassword");
     }
